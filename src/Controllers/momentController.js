@@ -64,7 +64,7 @@ const postMoment = async function (req, res) {
 //******************************************************************Get Moment List*********************************************************************** */
 const getListOfMoments = async function (req, res) {
     try {
-        let query = {isDeleted:false};
+        let query = { isDeleted: false };
         let getAllMoment = await MomentModel.find(query)
 
         if (!(getAllMoment.length > 0)) {
@@ -111,7 +111,7 @@ const updateMoments = async function (req, res) {
         if (!validator.isValidObjectId(momentId)) {
             return res.status(400).send({ status: false, msg: `${momentId} is invalid` })
         }
-        
+
         const buildM = await MomentModel.findOne({ _id: momentId })
         if (!buildM) {
             return res.status(404).send({ status: false, msg: `Cannot find any moment with this momentId - ${momentId}` })
@@ -136,15 +136,15 @@ const updateMoments = async function (req, res) {
             updatedData['tags'] = tags
         }
 
-            let files = req.files;
-            if (files && files.length > 0) {
-                let uploadedFileURL = await aws.uploadFile(files[0]);
+        let files = req.files;
+        if (files && files.length > 0) {
+            let uploadedFileURL = await aws.uploadFile(files[0]);
             updatedData["momentImage"] = uploadedFileURL;
-            }
-            const updated = await MomentModel.findOneAndUpdate({ _id: momentId, isDeleted:false }, updatedData, { new: true })
-
-            return res.status(200).send({ status: true, data: updated })
         }
+        const updated = await MomentModel.findOneAndUpdate({ _id: momentId, isDeleted: false }, updatedData, { new: true })
+
+        return res.status(200).send({ status: true, data: updated })
+    }
     catch (error) {
         res.status(500).send({ msg: "Error", error: error.message })
     }

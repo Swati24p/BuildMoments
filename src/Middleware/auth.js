@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const authToken = (token) => {
-    let tokenValidate = jwt.verify(token, "buildMomentSecret@@##!", (err, data) => {
+    let tokenValidate = jwt.verify(token, process.env.SECRETKEY, (err, data) => {
         if (err)
             return null
         else {

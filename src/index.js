@@ -1,17 +1,17 @@
+const dotenv = require("dotenv");
 const express = require("express");
 const multer = require("multer");
 const bodyParser = require("body-parser")
 const route = require("./routes/route")
 const mongoose = require("mongoose")
 const app = express();
-
 const { AppConfig } = require('aws-sdk');
 
 app.use(bodyParser.json());
-
 app.use(multer().any())
 
-mongoose.connect("mongodb+srv://swati_pathak:DGhDxlBIIfyRwGwk@cluster0.ogdpf.mongodb.net/buildMoments", {
+dotenv.config({path:'../config.env'});
+mongoose.connect( process.env.DATABASE, {
     useNewUrlParser: true
 })
 .then(() => console.log("MongoDB(Server: 27017) Is Connected !!!"))
@@ -29,6 +29,6 @@ app.use(function (e, req, res, next) {
     }
 });
 
-app.listen(process.env.PORT || 3000, function () {
-    console.log('Express app running on port ' + (process.env.PORT || 3000))
+app.listen(process.env.PORT , function () {
+    console.log('Express app running on port ' + (process.env.PORT))
 });

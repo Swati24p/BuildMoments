@@ -117,7 +117,7 @@ const login = async function (req, res) {
         const token = jwt.sign({
             userId: userId
         },
-            "buildMomentSecret@@##!", { expiresIn: "24H" }
+        process.env.SECRETKEY, { expiresIn: "24H" }
         );
 
         res.status(200).send({
