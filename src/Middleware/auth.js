@@ -14,6 +14,7 @@ const authToken = (token) => {
 const authentication = async function (req, res, next) {
     try {
         let token1 = req.headers['authorization'];
+        let user ="swati"
         if (!token1) token1 = req.headers["Authorization"];
         if (!token1) {
             return res.status(400).send({ Error: "Enter Token In BearerToken !!!" });
@@ -26,7 +27,6 @@ const authentication = async function (req, res, next) {
         if (!checktoken) {
             return res.status(401).send({ Status: false, msg: "InValid Token !!!" });
         }
-
         req['userId'] = checktoken.userId;
         next();
     }
