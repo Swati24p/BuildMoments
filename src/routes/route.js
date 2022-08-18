@@ -13,7 +13,7 @@ router.post("/login", login);
 router.post("/addmoments/:userId",auth.authentication, postMoment);
 router.get("/getmomentsList/:userId", getListOfMoments);
 router.put("/updatemoments/:userId/:momentId",auth.authentication, updateMoments);
-router.delete("/deletemoments/:momentId",auth.authentication,auth.user, deleteMoments);
+router.delete("/deletemoments/:momentId",auth.authentication, deleteMoments);
 
 
 

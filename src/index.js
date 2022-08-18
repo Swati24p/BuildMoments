@@ -5,7 +5,7 @@ const bodyParser = require("body-parser")
 const route = require("./routes/route")
 const mongoose = require("mongoose")
 const app = express();
-const { AppConfig } = require('aws-sdk');
+//const { AppConfig } = require('aws-sdk');
 
 app.use(bodyParser.json());
 app.use(multer().any())
@@ -14,7 +14,7 @@ dotenv.config({path:'../config.env'});
 mongoose.connect( process.env.DATABASE, {
     useNewUrlParser: true
 })
-.then(() => console.log("MongoDB(Server: 27017) Is Connected !!!"))
+.then(() => console.log("MongoDB(defaultServer: 27017) Is Connected !!!"))
 .catch(err => console.log(err))
 
 app.use('/', route);
